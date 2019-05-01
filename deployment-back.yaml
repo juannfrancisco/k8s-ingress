@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: ms-dal-users
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-dal-users
+  template:
+    metadata:
+      labels:
+        app: ms-dal-users
+    spec:
+      containers:
+      - name: ms-dal-users
+        image: gcr.io/ambient-scope-211818/ms-dal-users:latest
+        env:
+        - name: project-port
+          value: "8081"        
+        ports:
+        - containerPort: 8081
+---
+## EXPOSE 
+kind: Service
+apiVersion: v1
+metadata:
+  name: ms-dal-users-svc
+spec:
+  selector:
+    app: ms-dal-users
+  type: NodePort
+  ports:
+  #---------------------------------------- [CONTAINER PORT: dal-airport]  -------------------------------#  
+  - name: ms-dal-users
+    protocol: TCP
+    port: 8081
+    nodePort: 30290
+    targetPort: 8081

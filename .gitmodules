@@ -1,0 +1,6 @@
+[submodule "ms-dal-users"]
+	path = ms-dal-users
+	url = git@github.com:juannfrancisco/ms-dal-users.git
+[submodule "example-angular-7"]
+	path = example-angular-7
+	url = git@github.com:juannfrancisco/example-angular-7.git

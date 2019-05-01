@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: frontend-angular
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-angular
+  template:
+    metadata:
+      labels:
+        app: frontend-angular
+    spec:
+      containers:
+      - name: frontend-angular
+        image: gcr.io/ambient-scope-211818/front-user:1.0
+        ports:
+        - containerPort: 8081
+---
+## EXPOSE 
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend-angular-svc
+spec:
+  selector:
+    app: frontend-angular
+  type: NodePort
+  ports:
+  #---------------------------------------- [CONTAINER PORT: dal-airport]  -------------------------------#  
+  - name: frontend-angular
+    protocol: TCP
+    port: 80
+    nodePort: 30291
+    targetPort: 80

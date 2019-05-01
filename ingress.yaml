@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: frontend-angular-svc
+          servicePort: 80
+      - path: /api
+        backend:
+          serviceName: ms-dal-users-svc
+          servicePort: 8081
