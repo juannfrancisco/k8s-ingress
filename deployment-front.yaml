@@ -16,7 +16,12 @@ spec:
       - name: frontend-angular
         image: gcr.io/ambient-scope-211818/front-user:1.0
         ports:
-        - containerPort: 8081
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
 ---
 ## EXPOSE 
 kind: Service

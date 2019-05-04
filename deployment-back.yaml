@@ -20,6 +20,11 @@ spec:
           value: "8081"        
         ports:
         - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 60
 ---
 ## EXPOSE 
 kind: Service
