@@ -6,11 +6,19 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /app/*
         backend:
           serviceName: frontend-angular-svc
           servicePort: 80
-      - path: /api/*
+      - path: /*
         backend:
           serviceName: ms-dal-users-svc
           servicePort: 8081
+      - path: /test/*
+        backend:
+          serviceName: ms-hello-app-svc
+          servicePort: 8080
+      - path: /test/v1/*
+        backend:
+          serviceName: ms-hello-app-svc
+          servicePort: 8080

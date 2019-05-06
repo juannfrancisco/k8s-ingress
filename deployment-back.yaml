@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ms-dal-users
-        image: gcr.io/ambient-scope-211818/ms-dal-users:latest
+        image: gcr.io/ambient-scope-211818/ms-dal-users:1.0.0
         env:
         - name: project-port
           value: "8081"        
@@ -36,7 +36,6 @@ spec:
     app: ms-dal-users
   type: NodePort
   ports:
-  #---------------------------------------- [CONTAINER PORT: dal-airport]  -------------------------------#  
   - name: ms-dal-users
     protocol: TCP
     port: 8081

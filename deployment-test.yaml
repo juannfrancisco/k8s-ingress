@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: ms-hello-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-hello-app
+  template:
+    metadata:
+      labels:
+        app: ms-hello-app
+    spec:
+      containers:
+      - name: ms-hello-app
+        image: gcr.io/google-samples/hello-app:1.0
+        ports:
+        - containerPort: 8080
+---
+## EXPOSE 
+kind: Service
+apiVersion: v1
+metadata:
+  name: ms-hello-app-svc
+spec:
+  selector:
+    app: ms-hello-app
+  type: NodePort
+  ports:
+  - name: ms-hello-app
+    protocol: TCP
+    port: 8080
+    nodePort: 30292
+    targetPort: 8080

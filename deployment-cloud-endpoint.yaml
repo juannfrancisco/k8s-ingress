@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata: 
+  name: ms-enpoint-app
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: ms-enpoint-app
+  template: 
+    metadata: 
+      labels: 
+        app: ms-enpoint-app
+    spec: 
+      containers: 
+        - name: esp
+          args: 
+            - "--http_port=8080"
+            - "--backend=127.0.0.1:8081"
+            - "--service=test-api.endpoints.ambient-scope-211818.cloud.goog"
+            - "--rollout_strategy=managed"
+          image: "gcr.io/endpoints-release/endpoints-runtime:1"
+          ports: 
+            - containerPort: 8080
+        - name: ms-dal-users
+          image: "gcr.io/ambient-scope-211818/ms-dal-users:1.0.0"
+          ports: 
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-enpoint-app-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080  
+    protocol: TCP
+    name: http
+  selector:
+    app: ms-enpoint-app
+  type: LoadBalancer

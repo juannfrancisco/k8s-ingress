@@ -33,7 +33,6 @@ spec:
     app: frontend-angular
   type: NodePort
   ports:
-  #---------------------------------------- [CONTAINER PORT: dal-airport]  -------------------------------#  
   - name: frontend-angular
     protocol: TCP
     port: 80
